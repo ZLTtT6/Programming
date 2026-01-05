@@ -20,18 +20,6 @@ public class TrackManager : MonoBehaviour
         return tracks.ContainsKey(gridPos);
     }
 
-    public void ReserveCell(Vector2Int gridPos)
-    {
-        tracks[gridPos] = null;
-        UpdateNeighbors(gridPos);
-    }
-
-    public void AddTrack(Vector2Int gridPos, TrackModule trackModule)
-    {
-        tracks[gridPos] = trackModule;
-        UpdateNeighbors(gridPos);
-    }
-
     public bool HasTrack(Vector2Int gridPos)
     {
         return tracks.ContainsKey(gridPos);
@@ -46,6 +34,33 @@ public class TrackManager : MonoBehaviour
             return trackModule;
 
         return null;
+    }
+
+    public void ReserveCell(Vector2Int gridPos)
+    {
+        tracks[gridPos] = null;
+        UpdateNeighbors(gridPos);
+    }
+
+    public void AddTrack(Vector2Int gridPos, TrackModule trackModule)
+    {
+        tracks[gridPos] = trackModule;
+        UpdateNeighbors(gridPos);
+    }
+
+    public void RemoveTrack(Vector2Int gridPos)
+    {
+        if (tracks.ContainsKey(gridPos) == false)
+            return;
+
+        TrackModule trackModule = GetTrack(gridPos);
+
+        // 如果这个格子是 ReserveCell 的 null，占位不允许删除
+        if (trackModule == null)
+            return;
+
+        tracks.Remove(gridPos);
+        UpdateNeighbors(gridPos);
     }
 
     void UpdateNeighbors(Vector2Int gridPos)
