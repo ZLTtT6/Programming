@@ -54,8 +54,6 @@ public class TrackManager : MonoBehaviour
             return;
 
         TrackModule trackModule = GetTrack(gridPos);
-
-        // 如果这个格子是 ReserveCell 的 null，占位不允许删除
         if (trackModule == null)
             return;
 

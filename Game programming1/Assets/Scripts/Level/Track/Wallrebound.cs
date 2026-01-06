@@ -7,7 +7,7 @@ public class Wallrebound : MonoBehaviour
     public string wallTag = "Wall";
     public string finishTag = "Finish";
 
-    [Header("Speed (constant)")]
+    [Header("Speed")]
     public float speed = 8f;
     public float minReflectDot = 0f;
     public float nudgeOut = 0.02f;

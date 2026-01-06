@@ -8,13 +8,12 @@ public class BuildController : MonoBehaviour
     public GameObject selectedTrackPrefab;
 
     [Header("Rotate")]
-    public int rotateStep = 90;
-
-    private int rotateIndex = 0;
+    public int rotateAngle = 90;
+    private int rotateTime = 0;
 
     private GameObject previewObject;
-    private Vector2Int hoverGridPos;
-    private bool hasHoverPos = false;
+    private Vector2Int previewObjectPos;
+    private bool emptyNot = false;
 
     void Update()
     {
@@ -32,14 +31,15 @@ public class BuildController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            TogglePlaceOrRemove();
+            PlaceOrDelect();
         }
     }
 
+    // for UI to select
     public void SetSelectedTrackPrefab(GameObject prefab)
     {
         selectedTrackPrefab = prefab;
-        rotateIndex = 0;
+        rotateTime = 0;
 
         if (previewObject != null)
         {
@@ -50,25 +50,24 @@ public class BuildController : MonoBehaviour
 
     void RotateLeft()
     {
-        rotateIndex -= 1;
-        if (rotateIndex < 0)
+        rotateTime -= 1;
+        if (rotateTime < 0)
         {
-            rotateIndex = 3;
+            rotateTime = 3;
         }
     }
-
     void RotateRight()
     {
-        rotateIndex += 1;
-        if (rotateIndex > 3)
+        rotateTime += 1;
+        if (rotateTime > 3)
         {
-            rotateIndex = 0;
+            rotateTime = 0;
         }
     }
 
     void UpdatePreview()
     {
-        hasHoverPos = false;
+        emptyNot = false;
 
         if (gridManager == null)
         {
@@ -89,6 +88,7 @@ public class BuildController : MonoBehaviour
             return;
         }
 
+        // Determine mouse position
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hitInfo;
@@ -99,23 +99,25 @@ public class BuildController : MonoBehaviour
             return;
         }
 
+        // Get the world coordinates of the points hit by the ray to grid coordinates.
         Vector2Int gridPos = gridManager.WorldToGrid(hitInfo.point);
 
-        bool validPos = gridManager.IsValidGridPosition(gridPos.x, gridPos.y);
+        bool validPos = gridManager.GridPosition(gridPos.x, gridPos.y);
         if (validPos == false)
         {
             HidePreview();
             return;
         }
 
-        hoverGridPos = gridPos;
-        hasHoverPos = true;
+        previewObjectPos = gridPos;
+        emptyNot = true;
 
         EnsurePreviewObject();
 
+        // Determine the position and rotation of the preview object
         Vector3 spawnPos = gridManager.GridToWorld(gridPos.x, gridPos.y);
         Quaternion prefabRotation = selectedTrackPrefab.transform.rotation;
-        Quaternion rotateOffset = Quaternion.Euler(0f, rotateIndex * rotateStep, 0f);
+        Quaternion rotateOffset = Quaternion.Euler(0f, rotateTime * rotateAngle, 0f);
         Quaternion spawnRotation = rotateOffset * prefabRotation;
 
         previewObject.transform.position = spawnPos;
@@ -177,9 +179,9 @@ public class BuildController : MonoBehaviour
         }
     }
 
-    void TogglePlaceOrRemove()
+    void PlaceOrDelect()
     {
-        if (hasHoverPos == false)
+        if (emptyNot == false)
             return;
 
         if (gridManager == null)
@@ -192,23 +194,25 @@ public class BuildController : MonoBehaviour
         if (trackManager == null)
             return;
 
-        TrackModule existingTrack = trackManager.GetTrack(hoverGridPos);
+        // Check if the current cell already has a TrackModule.
+        TrackModule existingTrack = trackManager.GetTrack(previewObjectPos);
         if (existingTrack != null)
         {
-            trackManager.RemoveTrack(hoverGridPos);
+            trackManager.RemoveTrack(previewObjectPos);
             Destroy(existingTrack.gameObject);
             return;
         }
 
-        bool occupied = trackManager.IsOccupied(hoverGridPos);
+        bool occupied = trackManager.IsOccupied(previewObjectPos);
         if (occupied == true)
             return;
 
-        // 3) ∑Ò‘Ú∑≈÷√
-        Vector3 spawnPos = gridManager.GridToWorld(hoverGridPos.x, hoverGridPos.y);
+        // Calculate the world coordinates of the center of this grid.
+        Vector3 spawnPos = gridManager.GridToWorld(previewObjectPos.x, previewObjectPos.y);
 
+        // Get rotate prefab
         Quaternion prefabRotation = selectedTrackPrefab.transform.rotation;
-        Quaternion rotateOffset = Quaternion.Euler(0f, rotateIndex * rotateStep, 0f);
+        Quaternion rotateOffset = Quaternion.Euler(0f, rotateTime * rotateAngle, 0f);
         Quaternion spawnRotation = rotateOffset * prefabRotation;
 
         GameObject newObject = Instantiate(selectedTrackPrefab, spawnPos, spawnRotation);
@@ -217,10 +221,10 @@ public class BuildController : MonoBehaviour
         if (trackModule == null)
             return;
 
-        trackModule.gridPos = hoverGridPos;
-        trackModule.rotationIndex = rotateIndex;
-
-        trackManager.AddTrack(hoverGridPos, trackModule);
+        // Record the grid position of the module
+        trackModule.gridPos = previewObjectPos;
+        trackModule.rotationIndex = rotateTime;
+        trackManager.AddTrack(previewObjectPos, trackModule);
         trackModule.UpdateWalls();
     }
 }

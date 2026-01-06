@@ -5,19 +5,20 @@ public class GridManager : MonoBehaviour
     public int gridWidth = 5000;
     public int gridHeight = 5000;
     public float cellSize = 1f;
-
     public Vector3 originPosition = Vector3.zero;
 
+    // make a world position to grid
     public Vector2Int WorldToGrid(Vector3 worldPosition)
     {
-        Vector3 offset = worldPosition - originPosition;
+        Vector3 gridset = worldPosition - originPosition;
 
-        int x = Mathf.FloorToInt(offset.x / cellSize);
-        int z = Mathf.FloorToInt(offset.z / cellSize);
+        int x = Mathf.FloorToInt(gridset.x / cellSize);
+        int z = Mathf.FloorToInt(gridset.z / cellSize);
 
         return new Vector2Int(x, z);
     }
 
+    // make grid position to world to judgment center point
     public Vector3 GridToWorld(int x, int z)
     {
         float worldX = (x + 0.5f) * cellSize;
@@ -26,7 +27,8 @@ public class GridManager : MonoBehaviour
         return originPosition + new Vector3(worldX, 0f, worldZ);
     }
 
-    public bool IsValidGridPosition(int x, int z)
+    // determine if the current grid is within the range
+    public bool GridPosition(int x, int z)
     {
         if (x < 0 || z < 0)
             return false;
@@ -37,6 +39,7 @@ public class GridManager : MonoBehaviour
         return true;
     }
 
+    // show the grid
     private void OnDrawGizmos()
     {
         if (cellSize <= 0f)
