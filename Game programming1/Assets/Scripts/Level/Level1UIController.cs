@@ -4,84 +4,57 @@ public class Level1UIController : MonoBehaviour
 {
     [Header("UI")]
     public GameObject startButton;
-    public GameObject finishPanel;
+    public GameObject winPanel;
+    public GameObject losePanel;
 
     [Header("References")]
     public StartMoving raceManager;
     public BuildController buildController;
+    public Level1Finish level1Finish;
 
     void Start()
     {
-        if (finishPanel != null)
-        {
-            finishPanel.SetActive(false);
-        }
-
-        if (raceManager != null)
-        {
-            raceManager.RaceFinished += OnRaceFinished;
-        }
-    }
-
-    void OnDestroy()
-    {
-        if (raceManager != null)
-        {
-            raceManager.RaceFinished -= OnRaceFinished;
-        }
+        if (winPanel != null) winPanel.SetActive(false);
+        if (losePanel != null) losePanel.SetActive(false);
     }
 
     public void OnStartButtonPointerDown()
     {
         if (buildController != null)
-        {
             buildController.enabled = false;
-        }
     }
 
     public void OnStartButtonClicked()
     {
         if (buildController != null)
-        {
             buildController.enabled = false;
-        }
 
         Time.timeScale = 1f;
 
-        if (raceManager != null)
-        {
-            raceManager.StartRace();
-        }
-
-        if (startButton != null)
-        {
-            startButton.SetActive(false);
-        }
-
-        if (finishPanel != null)
-        {
-            finishPanel.SetActive(false);
-        }
+        if (winPanel != null) winPanel.SetActive(false);
+        if (losePanel != null) losePanel.SetActive(false);
+        if (level1Finish != null) level1Finish.ResetFinish();
+        if (raceManager != null) raceManager.StartRace();
+        if (startButton != null) startButton.SetActive(false);
     }
 
     public void ShowStartButton()
     {
         if (startButton != null)
-        {
             startButton.SetActive(true);
-        }
     }
 
-    void OnRaceFinished()
+    public void ShowWinUI()
     {
-        if (finishPanel != null)
-        {
-            finishPanel.SetActive(true);
-        }
+        if (winPanel != null) winPanel.SetActive(true);
+        if (losePanel != null) losePanel.SetActive(false);
+        if (startButton != null) startButton.SetActive(true);
+    }
 
-        if (startButton != null)
-        {
-            startButton.SetActive(true);
-        }
+    public void ShowLoseUI()
+    {
+        if (losePanel != null) losePanel.SetActive(true);
+        if (winPanel != null) winPanel.SetActive(false);
+        if (startButton != null) startButton.SetActive(true);
     }
 }
