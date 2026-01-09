@@ -7,7 +7,7 @@ public class TrackManager : MonoBehaviour
 
     public Vector2Int startGridPos;
     public Vector2Int finishGridPos;
-    public Vector2Int startExitDir = Vector2Int.up;
+    public Vector2Int startDir = Vector2Int.up;
 
     private Dictionary<Vector2Int, TrackModule> tracks = new Dictionary<Vector2Int, TrackModule>();
 

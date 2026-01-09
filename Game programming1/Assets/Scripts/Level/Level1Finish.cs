@@ -13,13 +13,16 @@ public class Level1Finish : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (hasFirstArrived) return;
-        if (other == null) return;
-
+        if (hasFirstArrived) 
+            return;
+        if (other == null) 
+            return;
         Wallrebound ball = other.GetComponentInParent<Wallrebound>();
-        if (ball == null) return;
+        if (ball == null) 
+            return;
 
-        if (ball != fastBall && ball != slowBall) return;
+        if (ball != fastBall && ball != slowBall) 
+            return;
 
         hasFirstArrived = true;
 

@@ -5,7 +5,7 @@ public class BuildController : MonoBehaviour
     public GridManager gridManager;
 
     [Header("Selected Prefab")]
-    public GameObject selectedTrackPrefab;
+    public GameObject TrackPrefab;
 
     [Header("Rotate")]
     public int rotateAngle = 90;
@@ -36,9 +36,9 @@ public class BuildController : MonoBehaviour
     }
 
     // for UI to select
-    public void SetSelectedTrackPrefab(GameObject prefab)
+    public void SetTrackPrefab(GameObject prefab)
     {
-        selectedTrackPrefab = prefab;
+        TrackPrefab = prefab;
         rotateTime = 0;
 
         if (previewObject != null)
@@ -75,7 +75,7 @@ public class BuildController : MonoBehaviour
             return;
         }
 
-        if (selectedTrackPrefab == null)
+        if (TrackPrefab == null)
         {
             HidePreview();
             return;
@@ -116,7 +116,7 @@ public class BuildController : MonoBehaviour
 
         // Determine the position and rotation of the preview object
         Vector3 spawnPos = gridManager.GridToWorld(gridPos.x, gridPos.y);
-        Quaternion prefabRotation = selectedTrackPrefab.transform.rotation;
+        Quaternion prefabRotation = TrackPrefab.transform.rotation;
         Quaternion rotateOffset = Quaternion.Euler(0f, rotateTime * rotateAngle, 0f);
         Quaternion spawnRotation = rotateOffset * prefabRotation;
 
@@ -134,8 +134,8 @@ public class BuildController : MonoBehaviour
         if (previewObject != null)
             return;
 
-        previewObject = Instantiate(selectedTrackPrefab);
-        previewObject.name = "Preview_" + selectedTrackPrefab.name;
+        previewObject = Instantiate(TrackPrefab);
+        previewObject.name = "Preview_" + TrackPrefab.name;
 
         Collider[] colliders = previewObject.GetComponentsInChildren<Collider>(true);
         for (int i = 0; i < colliders.Length; i++)
@@ -187,7 +187,7 @@ public class BuildController : MonoBehaviour
         if (gridManager == null)
             return;
 
-        if (selectedTrackPrefab == null)
+        if (TrackPrefab == null)
             return;
 
         TrackManager trackManager = TrackManager.Instance;
@@ -211,11 +211,11 @@ public class BuildController : MonoBehaviour
         Vector3 spawnPos = gridManager.GridToWorld(previewObjectPos.x, previewObjectPos.y);
 
         // Get rotate prefab
-        Quaternion prefabRotation = selectedTrackPrefab.transform.rotation;
+        Quaternion prefabRotation = TrackPrefab.transform.rotation;
         Quaternion rotateOffset = Quaternion.Euler(0f, rotateTime * rotateAngle, 0f);
         Quaternion spawnRotation = rotateOffset * prefabRotation;
 
-        GameObject newObject = Instantiate(selectedTrackPrefab, spawnPos, spawnRotation);
+        GameObject newObject = Instantiate(TrackPrefab, spawnPos, spawnRotation);
 
         TrackModule trackModule = newObject.GetComponent<TrackModule>();
         if (trackModule == null)

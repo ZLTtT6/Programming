@@ -20,7 +20,8 @@ public class StartMoving : MonoBehaviour
 
     public void StartRace()
     {
-        if (hasStarted) return;
+        if (hasStarted) 
+            return;
         hasStarted = true;
 
         Vector3 dir = startDirection;

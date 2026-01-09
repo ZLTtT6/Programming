@@ -7,26 +7,13 @@ public class StartModule : MonoBehaviour
 
     void Start()
     {
-        if (gridManager == null)
-        {
-            gridManager = FindFirstObjectByType<GridManager>();
-        }
-
-        if (gridManager == null)
-        {
-            return;
-        }
-
         Vector2Int startGridPos = gridManager.WorldToGrid(transform.position);
 
         TrackManager trackManager = TrackManager.Instance;
-        if (trackManager == null)
-        {
-            return;
-        }
 
+        // Record information from the starting grid in the game.
         trackManager.startGridPos = startGridPos;
-        trackManager.startExitDir = exitDir;
+        trackManager.startDir = exitDir;
         trackManager.ReserveCell(startGridPos);
     }
 }

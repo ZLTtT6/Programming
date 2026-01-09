@@ -22,25 +22,16 @@ public class TrackSelect : MonoBehaviour
 
     public void Select1()
     {
-        if (buildController == null)
-            return;
-
-        buildController.SetSelectedTrackPrefab(Prefab1);
+        buildController.SetTrackPrefab(Prefab1);
     }
 
     public void Select2()
     {
-        if (buildController == null)
-            return;
-
-        buildController.SetSelectedTrackPrefab(Prefab2);
+        buildController.SetTrackPrefab(Prefab2);
     }
 
     public void Select3()
     {
-        if (buildController == null)
-            return;
-
-        buildController.SetSelectedTrackPrefab(Prefab3);
+        buildController.SetTrackPrefab(Prefab3);
     }
 }

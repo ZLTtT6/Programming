@@ -11,18 +11,9 @@ public class FinishModule : MonoBehaviour
             gridManager = FindFirstObjectByType<GridManager>();
         }
 
-        if (gridManager == null)
-        {
-            return;
-        }
-
         Vector2Int finishGridPos = gridManager.WorldToGrid(transform.position);
 
         TrackManager trackManager = TrackManager.Instance;
-        if (trackManager == null)
-        {
-            return;
-        }
 
         trackManager.finishGridPos = finishGridPos;
         trackManager.ReserveCell(finishGridPos);
