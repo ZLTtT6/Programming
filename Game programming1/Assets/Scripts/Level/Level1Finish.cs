@@ -29,10 +29,12 @@ public class Level1Finish : MonoBehaviour
         if (ball == fastBall)
         {
             Level1UIController.ShowWinUI();
+            Time.timeScale = 0;
         }
         else
         {
             Level1UIController.ShowLoseUI();
+            Time.timeScale = 0;
         }
     }
 

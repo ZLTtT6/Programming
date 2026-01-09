@@ -31,11 +31,16 @@ public class Level1UIController : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        if (winPanel != null) winPanel.SetActive(false);
-        if (losePanel != null) losePanel.SetActive(false);
-        if (level1Finish != null) level1Finish.ResetFinish();
-        if (raceManager != null) raceManager.StartRace();
-        if (startButton != null) startButton.SetActive(false);
+        if (winPanel != null) 
+            winPanel.SetActive(false);
+        if (losePanel != null) 
+            losePanel.SetActive(false);
+        if (level1Finish != null) 
+            level1Finish.ResetFinish();
+        if (raceManager != null)
+            raceManager.StartRace();
+        if (startButton != null) 
+            startButton.SetActive(false);
     }
 
     public void ShowStartButton()
@@ -46,15 +51,21 @@ public class Level1UIController : MonoBehaviour
 
     public void ShowWinUI()
     {
-        if (winPanel != null) winPanel.SetActive(true);
-        if (losePanel != null) losePanel.SetActive(false);
-        if (startButton != null) startButton.SetActive(true);
+        if (winPanel != null) 
+            winPanel.SetActive(true);
+        if (losePanel != null) 
+            losePanel.SetActive(false);
+        if (startButton != null) 
+            startButton.SetActive(true);
     }
 
     public void ShowLoseUI()
     {
-        if (losePanel != null) losePanel.SetActive(true);
-        if (winPanel != null) winPanel.SetActive(false);
-        if (startButton != null) startButton.SetActive(true);
+        if (losePanel != null) 
+            losePanel.SetActive(true);
+        if (winPanel != null) 
+            winPanel.SetActive(false);
+        if (startButton != null) 
+            startButton.SetActive(true);
     }
 }
