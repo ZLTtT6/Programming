@@ -3,9 +3,10 @@ using UnityEngine;
 public class Level1UIController : MonoBehaviour
 {
     [Header("UI")]
-    public GameObject startButton;
     public GameObject winPanel;
     public GameObject losePanel;
+    public GameObject OtherPanel;
+
 
     [Header("References")]
     public StartMoving raceManager;
@@ -39,14 +40,14 @@ public class Level1UIController : MonoBehaviour
             level1Finish.ResetFinish();
         if (raceManager != null)
             raceManager.StartRace();
-        if (startButton != null) 
-            startButton.SetActive(false);
+        if (OtherPanel != null)
+            OtherPanel.SetActive(false);
     }
 
-    public void ShowStartButton()
+    public void Otherpanel()
     {
-        if (startButton != null)
-            startButton.SetActive(true);
+        if (OtherPanel != null)
+            OtherPanel.SetActive(true);
     }
 
     public void ShowWinUI()
@@ -55,8 +56,8 @@ public class Level1UIController : MonoBehaviour
             winPanel.SetActive(true);
         if (losePanel != null) 
             losePanel.SetActive(false);
-        if (startButton != null) 
-            startButton.SetActive(true);
+        if (OtherPanel != null)
+            OtherPanel.SetActive(false);
     }
 
     public void ShowLoseUI()
@@ -65,7 +66,7 @@ public class Level1UIController : MonoBehaviour
             losePanel.SetActive(true);
         if (winPanel != null) 
             winPanel.SetActive(false);
-        if (startButton != null) 
-            startButton.SetActive(true);
+        if (OtherPanel != null)
+            OtherPanel.SetActive(false);
     }
 }

@@ -13,10 +13,64 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private string level1SceneName = "Level1";
     [SerializeField] private string level2SceneName = "Level2";
     [SerializeField] private string level3SceneName = "Level3";
+    [SerializeField] private string startSceneName = "Start";
+
+    [Header("Levels")]
+    public bool isLevel2 = false;
+    public GameObject level2Buttpm;
+    public GameObject noLevel2Buttpm;
+
+    public bool isLevel3 = false;
+    public GameObject level3Button;
+    public GameObject noLevel3Buttpm;
+
+    private const string KEY_UNLOCK_L2 = "UnlockLevel2";
+    private const string KEY_UNLOCK_L3 = "UnlockLevel3";
 
     void Start()
     {
+        LoadUnlockState();
         OpenMainPanel();
+        RefreshLevelPanels();
+    }
+
+    private void LoadUnlockState()
+    {
+        isLevel2 = PlayerPrefs.GetInt(KEY_UNLOCK_L2, 0) == 1;
+        isLevel3 = PlayerPrefs.GetInt(KEY_UNLOCK_L3, 0) == 1;
+
+        if (isLevel3) isLevel2 = true;
+    }
+
+    private void SaveUnlockState()
+    {
+        PlayerPrefs.SetInt(KEY_UNLOCK_L2, isLevel2 ? 1 : 0);
+        PlayerPrefs.SetInt(KEY_UNLOCK_L3, isLevel3 ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public void RefreshLevelPanels()
+    {
+        if (level2Buttpm != null) level2Buttpm.SetActive(isLevel2);
+        if (noLevel2Buttpm != null) noLevel2Buttpm.SetActive(!isLevel2);
+
+        if (level3Button != null) level3Button.SetActive(isLevel3);
+        if (noLevel3Buttpm != null) noLevel3Buttpm.SetActive(!isLevel3);
+    }
+
+    public void UnlockLevel2()
+    {
+        isLevel2 = true;
+        SaveUnlockState();
+        RefreshLevelPanels();
+    }
+
+    public void UnlockLevel3()
+    {
+        isLevel2 = true;
+        isLevel3 = true;
+        SaveUnlockState();
+        RefreshLevelPanels();
     }
 
     void CloseAllPanels()
@@ -37,6 +91,9 @@ public class MainMenuController : MonoBehaviour
     {
         CloseAllPanels();
         if (levelPanel != null) levelPanel.SetActive(true);
+
+        LoadUnlockState();
+        RefreshLevelPanels();
     }
 
     public void OnClickSettings()
@@ -72,17 +129,24 @@ public class MainMenuController : MonoBehaviour
 
     public void OnClickLevel2()
     {
+        if (!isLevel2) return;
         LoadLevel(level2SceneName);
     }
 
     public void OnClickLevel3()
     {
+        if (!isLevel3) return;
         LoadLevel(level3SceneName);
+    }
+
+    public void OnClickStartLevel()
+    {
+        LoadLevel(startSceneName);
     }
 
     void LoadLevel(string sceneName)
     {
-        if (sceneName == null || sceneName.Trim().Length == 0)
+        if (string.IsNullOrWhiteSpace(sceneName))
             return;
 
         Time.timeScale = 1f;

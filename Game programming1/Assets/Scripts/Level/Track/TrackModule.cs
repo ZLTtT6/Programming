@@ -38,7 +38,6 @@ public class TrackModule : MonoBehaviour
         int steps = rotationIndex % 4;
         if (steps < 0) steps += 4;
 
-        // 反向旋转：世界方向 -> 预制体本地方向
         int inverseSteps = (4 - steps) % 4;
         Vector2Int localDir = RotateDirCW(worldDir, inverseSteps);
 
@@ -56,7 +55,6 @@ public class TrackModule : MonoBehaviour
 
         for (int i = 0; i < stepsCW; i++)
         {
-            // (x,y) -> (y,-x)  顺时针 90°
             result = new Vector2Int(result.y, -result.x);
         }
 
