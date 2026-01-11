@@ -55,6 +55,7 @@ public class Level1UIController : MonoBehaviour
             raceManager.StartRace();
         if (OtherPanel != null)
             OtherPanel.SetActive(false);
+        buildController.HidePreview();
     }
 
     public void Pause()

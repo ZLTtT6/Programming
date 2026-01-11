@@ -249,7 +249,7 @@ public class BuildController : MonoBehaviour
         }
     }
 
-    void HidePreview()
+    public void HidePreview()
     {
         if (previewObject != null)
         {
