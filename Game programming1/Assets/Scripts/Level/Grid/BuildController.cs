@@ -19,7 +19,6 @@ public class BuildController : MonoBehaviour
     [Header("Prefab3 (Attachment)")]
     public GameObject prefab3;
 
-    // 只记录预制体3：一个格子最多一个
     private Dictionary<Vector2Int, GameObject> prefab3Map = new Dictionary<Vector2Int, GameObject>();
 
     void Update()
@@ -42,7 +41,6 @@ public class BuildController : MonoBehaviour
         }
     }
 
-    // for UI to select
     public void SetTrackPrefab(GameObject prefab)
     {
         TrackPrefab = prefab;
@@ -103,6 +101,25 @@ public class BuildController : MonoBehaviour
         return baseTrack.trackType == 1 || baseTrack.trackType == 2;
     }
 
+    bool IsAdjacentToOccupied(Vector2Int pos)
+    {
+        TrackManager tm = TrackManager.Instance;
+        if (tm == null) return false;
+
+        return tm.IsOccupied(pos + Vector2Int.up)
+            || tm.IsOccupied(pos + Vector2Int.down)
+            || tm.IsOccupied(pos + Vector2Int.left)
+            || tm.IsOccupied(pos + Vector2Int.right);
+    }
+
+    bool CanPlaceTrack(Vector2Int pos)
+    {
+        TrackManager tm = TrackManager.Instance;
+        if (tm == null) return false;
+        if (tm.IsOccupied(pos)) return false;
+        return IsAdjacentToOccupied(pos);
+    }
+
     void UpdatePreview()
     {
         emptyNot = false;
@@ -146,7 +163,6 @@ public class BuildController : MonoBehaviour
         }
 
         previewObjectPos = gridPos;
-        emptyNot = true;
 
         EnsurePreviewObject();
 
@@ -160,9 +176,35 @@ public class BuildController : MonoBehaviour
         previewObject.transform.rotation = spawnRotation;
 
         if (previewObject.activeSelf == false)
-        {
             previewObject.SetActive(true);
+
+        TrackManager tm = TrackManager.Instance;
+        if (tm == null)
+        {
+            emptyNot = false;
+            return;
         }
+
+        if (IsSelectingPrefab3())
+        {
+            emptyNot = HasPrefab3(previewObjectPos) || CanPlacePrefab3(previewObjectPos);
+            return;
+        }
+
+        TrackModule existingTrack = tm.GetTrack(previewObjectPos);
+        if (existingTrack != null)
+        {
+            emptyNot = true;
+            return;
+        }
+
+        emptyNot = CanPlaceTrack(previewObjectPos);
+    }
+    public void SetBuildActive(bool active)
+    {
+        enabled = active;
+        if (!active) HidePreview();
+        if (!active) emptyNot = false;
     }
 
     void EnsurePreviewObject()
@@ -230,7 +272,6 @@ public class BuildController : MonoBehaviour
         if (trackManager == null)
             return;
 
- 
         if (IsSelectingPrefab3())
         {
             if (HasPrefab3(previewObjectPos))
@@ -266,6 +307,9 @@ public class BuildController : MonoBehaviour
 
         bool occupied = trackManager.IsOccupied(previewObjectPos);
         if (occupied == true)
+            return;
+
+        if (!CanPlaceTrack(previewObjectPos))
             return;
 
         Vector3 spawnPos = gridManager.GridToWorld(previewObjectPos.x, previewObjectPos.y);

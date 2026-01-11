@@ -2343,6 +2343,7 @@ MonoBehaviour:
   Prefab1: {fileID: 635378870347039804, guid: 47662d57d0a6ed947af4d7bcfd1840fd, type: 3}
   Prefab2: {fileID: 5752439950396129855, guid: 2e7d24e54dfe6e3418205066a9f1ce65, type: 3}
   Prefab3: {fileID: 3512210407532026730, guid: be664e9817149024288b7b0adfa79799, type: 3}
+  PrefabFinish: {fileID: 0}
   buildController: {fileID: 0}
 --- !u!4 &692457490
 Transform:
@@ -5102,9 +5103,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2144259950}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: OnClickLevel1
+        m_MethodName: OnClickLevel2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5641,9 +5642,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2144259950}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: OnClickStartLevel
+        m_MethodName: OnClickLevel2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6234,6 +6235,7 @@ MonoBehaviour:
   winPanel: {fileID: 1870897651}
   losePanel: {fileID: 1215690176}
   OtherPanel: {fileID: 1808904393}
+  ModulePanel: {fileID: 207080251}
   raceManager: {fileID: 1136943040}
   buildController: {fileID: 1319093128}
   level1Finish: {fileID: 1383162506}

@@ -6,6 +6,7 @@ public class Level1UIController : MonoBehaviour
     public GameObject winPanel;
     public GameObject losePanel;
     public GameObject OtherPanel;
+    public GameObject ModulePanel;
 
     private bool isPaused = false;
 
@@ -25,7 +26,7 @@ public class Level1UIController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            TogglePause();
+            Pause();
         }
     }
     public void OnStartButtonPointerDown()
@@ -56,25 +57,32 @@ public class Level1UIController : MonoBehaviour
             OtherPanel.SetActive(false);
     }
 
-    public void TogglePause()
+    public void Pause()
     {
-        if (OtherPanel == null) return;
+         if (OtherPanel == null) return;
 
-        isPaused = !isPaused;
-        OtherPanel.SetActive(isPaused);
+    isPaused = true;
+    OtherPanel.SetActive(true);
+    ModulePanel.SetActive(false);
 
-        Time.timeScale = isPaused ? 0f : 1f;
+    Time.timeScale = 0f;
 
-        AudioManager.Instance?.PlayButtonClickSFX();
+    if (buildController != null)
+        buildController.SetBuildActive(false);
+
+    AudioManager.Instance?.PlayButtonClickSFX();
     }
 
     public void Resume()
     {
-        if (OtherPanel == null) return;
-
         isPaused = false;
         OtherPanel.SetActive(false);
+        ModulePanel.SetActive(true);
+
         Time.timeScale = 1f;
+
+        if (buildController != null)
+            buildController.SetBuildActive(true);
 
         AudioManager.Instance?.PlayButtonClickSFX();
     }
@@ -99,6 +107,5 @@ public class Level1UIController : MonoBehaviour
         if (OtherPanel != null)
             OtherPanel.SetActive(false);
         AudioManager.Instance?.PlayLoseMusic();
-
     }
 }

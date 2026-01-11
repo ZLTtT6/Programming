@@ -145,14 +145,12 @@ public class MainMenuController : MonoBehaviour
 
     public void OnClickLevel2()
     {
-        if (!isLevel2) return;
         AudioManager.Instance?.PlayButtonClickSFX();
         LoadLevel(level2SceneName);
     }
 
     public void OnClickLevel3()
     {
-        if (!isLevel3) return;
         AudioManager.Instance?.PlayButtonClickSFX();
         LoadLevel(level3SceneName);
     }

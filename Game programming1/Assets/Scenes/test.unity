@@ -467,7 +467,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrackManager
   startGridPos: {x: 0, y: 0}
-  startExitDir: {x: 0, y: 1}
+  finishGridPos: {x: 0, y: 0}
+  startDir: {x: 0, y: 1}
 --- !u!4 &289129989
 Transform:
   m_ObjectHideFlags: 0
@@ -1032,6 +1033,67 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 414750582}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &474624368
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 879977773344488929, guid: be664e9817149024288b7b0adfa79799, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 879977773344488929, guid: be664e9817149024288b7b0adfa79799, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 879977773344488929, guid: be664e9817149024288b7b0adfa79799, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 879977773344488929, guid: be664e9817149024288b7b0adfa79799, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 879977773344488929, guid: be664e9817149024288b7b0adfa79799, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 879977773344488929, guid: be664e9817149024288b7b0adfa79799, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 879977773344488929, guid: be664e9817149024288b7b0adfa79799, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 879977773344488929, guid: be664e9817149024288b7b0adfa79799, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 879977773344488929, guid: be664e9817149024288b7b0adfa79799, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 879977773344488929, guid: be664e9817149024288b7b0adfa79799, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512210407532026730, guid: be664e9817149024288b7b0adfa79799, type: 3}
+      propertyPath: m_Name
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536763126397967911, guid: be664e9817149024288b7b0adfa79799, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.25
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: be664e9817149024288b7b0adfa79799, type: 3}
 --- !u!1 &512492497
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,6 +1259,7 @@ MonoBehaviour:
   Prefab1: {fileID: 635378870347039804, guid: 47662d57d0a6ed947af4d7bcfd1840fd, type: 3}
   Prefab2: {fileID: 5752439950396129855, guid: 2e7d24e54dfe6e3418205066a9f1ce65, type: 3}
   Prefab3: {fileID: 0}
+  PrefabFinish: {fileID: 0}
   buildController: {fileID: 0}
 --- !u!4 &692457490
 Transform:
@@ -1517,7 +1580,6 @@ MonoBehaviour:
   fastBall: {fileID: 2132304786}
   slowBall: {fileID: 1511975012}
   startDirection: {x: 0, y: 0, z: 1}
-  endFinishes: 1
 --- !u!4 &1136943041
 Transform:
   m_ObjectHideFlags: 0
@@ -1834,8 +1896,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildController
   gridManager: {fileID: 40652315}
-  selectedTrackPrefab: {fileID: 0}
-  rotateStep: 90
+  TrackPrefab: {fileID: 0}
+  rotateAngle: 90
+  prefab3: {fileID: 0}
 --- !u!4 &1319093129
 Transform:
   m_ObjectHideFlags: 0
@@ -2185,9 +2248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wallrebound
   wallTag: Wall
-  finishTag: Finish
   speed: 1.5
-  minReflectDot: 0
   nudgeOut: 0.06
   ignoreSpin: 1
   keepYZero: 1
@@ -2747,9 +2808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wallrebound
   wallTag: Wall
-  finishTag: Finish
   speed: 2
-  minReflectDot: 0
   nudgeOut: 0.1
   ignoreSpin: 1
   keepYZero: 1
@@ -2988,10 +3047,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4cfd3c3756787c4ebe614e4b91cafbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level1UIController
-  startButton: {fileID: 1334827827}
-  finishPanel: {fileID: 0}
+  winPanel: {fileID: 0}
+  losePanel: {fileID: 0}
+  OtherPanel: {fileID: 0}
+  ModulePanel: {fileID: 0}
   raceManager: {fileID: 1136943040}
   buildController: {fileID: 1319093128}
+  level1Finish: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3010,3 +3072,4 @@ SceneRoots:
   - {fileID: 2144259948}
   - {fileID: 1136943041}
   - {fileID: 692457490}
+  - {fileID: 474624368}
