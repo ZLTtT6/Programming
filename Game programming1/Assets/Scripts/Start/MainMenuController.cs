@@ -6,6 +6,7 @@ public class MainMenuController : MonoBehaviour
     [Header("Panels")]
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject levelPanel;
+    [SerializeField] private GameObject levelSelectPanel;
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject helpPanel;
 
@@ -14,6 +15,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private string level2SceneName = "Level2";
     [SerializeField] private string level3SceneName = "Level3";
     [SerializeField] private string startSceneName = "Start";
+    [SerializeField] private string FreeSceneName = "Freedom";
 
     [Header("Levels")]
     public bool isLevel2 = false;
@@ -77,6 +79,7 @@ public class MainMenuController : MonoBehaviour
     {
         if (mainPanel != null) mainPanel.SetActive(false);
         if (levelPanel != null) levelPanel.SetActive(false);
+        if (levelSelectPanel != null) levelSelectPanel.SetActive(false);
         if (settingsPanel != null) settingsPanel.SetActive(false);
         if (helpPanel != null) helpPanel.SetActive(false);
     }
@@ -87,13 +90,19 @@ public class MainMenuController : MonoBehaviour
         if (mainPanel != null) mainPanel.SetActive(true);
     }
 
-    public void OnClickStart()
+    public void OnClickLevelSelect()
     {
         CloseAllPanels();
-        if (levelPanel != null) levelPanel.SetActive(true);
+        if (levelSelectPanel != null) levelSelectPanel.SetActive(true);
 
         LoadUnlockState();
         RefreshLevelPanels();
+    }
+
+    public void OnClickLevel()
+    {
+        CloseAllPanels();
+        if (levelPanel != null) levelPanel.SetActive(true);
     }
 
     public void OnClickSettings()
@@ -107,6 +116,7 @@ public class MainMenuController : MonoBehaviour
         CloseAllPanels();
         if (helpPanel != null) helpPanel.SetActive(true);
     }
+
 
     public void OnClickBackToMain()
     {
@@ -142,6 +152,11 @@ public class MainMenuController : MonoBehaviour
     public void OnClickStartLevel()
     {
         LoadLevel(startSceneName);
+    }
+
+    public void OnClickFreeLevel()
+    {
+        LoadLevel(FreeSceneName);
     }
 
     void LoadLevel(string sceneName)
