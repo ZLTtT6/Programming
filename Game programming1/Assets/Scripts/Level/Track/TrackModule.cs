@@ -3,6 +3,8 @@ using UnityEngine;
 public class TrackModule : MonoBehaviour
 {
     public Vector2Int gridPos;
+    [Header("Track Type")]
+    public int trackType;
 
     [Header("Rotation (0=0бу,1=90бу,2=180бу,3=270бу)")]
     public int rotationIndex = 0;

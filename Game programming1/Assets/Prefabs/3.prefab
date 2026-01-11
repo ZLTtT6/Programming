@@ -28,9 +28,9 @@ Transform:
   m_GameObject: {fileID: 75335261124756805}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38268343, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 2.6, z: 0}
-  m_LocalScale: {x: 0.03, y: 0.11999998, z: 0.42000002}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: -0.1, y: 2.6, z: 0}
+  m_LocalScale: {x: 0.03, y: 0.11999998, z: 0.3}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 879977773344488929}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
@@ -120,6 +120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 879977773344488929}
+  - component: {fileID: -6794158903567786006}
   m_Layer: 0
   m_Name: 3
   m_TagString: Untagged
@@ -138,8 +139,27 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7536763126397967911}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6794158903567786006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3512210407532026730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4693846291babb4db82a85ef1c70d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrackModule
+  gridPos: {x: 0, y: 0}
+  trackType: 0
+  rotationIndex: 3
+  wallNorth: {fileID: 0}
+  wallSouth: {fileID: 0}
+  wallEast: {fileID: 0}
+  wallWest: {fileID: 0}

@@ -332,7 +332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrackModule
   gridPos: {x: 0, y: 0}
-  rotationIndex: 0
+  trackType: 0
+  rotationIndex: 2
   wallNorth: {fileID: 0}
   wallSouth: {fileID: 5999829930605941815}
   wallEast: {fileID: 8018658359017034614}
