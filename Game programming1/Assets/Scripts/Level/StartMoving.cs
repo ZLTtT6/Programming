@@ -8,7 +8,7 @@ public class StartMoving : MonoBehaviour
     public Wallrebound slowBall;
 
     [Header("Start Direction")]
-    public Vector3 startDirection = - Vector3.forward;
+    public Vector3 startDirection = Vector3.forward;
 
     private bool hasStarted = false;
 
@@ -24,7 +24,7 @@ public class StartMoving : MonoBehaviour
             return;
         hasStarted = true;
 
-        Vector3 dir = startDirection;
+        Vector3 dir = - startDirection;
         if (dir.sqrMagnitude < 0.001f) dir = Vector3.forward;
         dir.Normalize();
 

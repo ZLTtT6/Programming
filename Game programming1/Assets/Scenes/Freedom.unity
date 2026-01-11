@@ -3567,7 +3567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wallrebound
   wallTag: Wall
-  speed: 1.5
+  speed: 0.8
   nudgeOut: 0.06
   ignoreSpin: 1
   keepYZero: 1
@@ -5503,7 +5503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wallrebound
   wallTag: Wall
-  speed: 2
+  speed: 1
   nudgeOut: 0.1
   ignoreSpin: 1
   keepYZero: 1
