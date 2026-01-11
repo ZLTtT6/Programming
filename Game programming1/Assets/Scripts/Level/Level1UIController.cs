@@ -7,6 +7,8 @@ public class Level1UIController : MonoBehaviour
     public GameObject losePanel;
     public GameObject OtherPanel;
 
+    private bool isPaused = false;
+
 
     [Header("References")]
     public StartMoving raceManager;
@@ -19,14 +21,24 @@ public class Level1UIController : MonoBehaviour
         if (losePanel != null) losePanel.SetActive(false);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
+    }
     public void OnStartButtonPointerDown()
     {
+
         if (buildController != null)
             buildController.enabled = false;
     }
 
     public void OnStartButtonClicked()
     {
+        AudioManager.Instance?.PlayButtonClickSFX(); 
+        AudioManager.Instance?.PlayGameplayMusic();
         if (buildController != null)
             buildController.enabled = false;
 
@@ -44,10 +56,27 @@ public class Level1UIController : MonoBehaviour
             OtherPanel.SetActive(false);
     }
 
-    public void Otherpanel()
+    public void TogglePause()
     {
-        if (OtherPanel != null)
-            OtherPanel.SetActive(true);
+        if (OtherPanel == null) return;
+
+        isPaused = !isPaused;
+        OtherPanel.SetActive(isPaused);
+
+        Time.timeScale = isPaused ? 0f : 1f;
+
+        AudioManager.Instance?.PlayButtonClickSFX();
+    }
+
+    public void Resume()
+    {
+        if (OtherPanel == null) return;
+
+        isPaused = false;
+        OtherPanel.SetActive(false);
+        Time.timeScale = 1f;
+
+        AudioManager.Instance?.PlayButtonClickSFX();
     }
 
     public void ShowWinUI()
@@ -58,6 +87,7 @@ public class Level1UIController : MonoBehaviour
             losePanel.SetActive(false);
         if (OtherPanel != null)
             OtherPanel.SetActive(false);
+        AudioManager.Instance?.PlayWinMusic();
     }
 
     public void ShowLoseUI()
@@ -68,5 +98,7 @@ public class Level1UIController : MonoBehaviour
             winPanel.SetActive(false);
         if (OtherPanel != null)
             OtherPanel.SetActive(false);
+        AudioManager.Instance?.PlayLoseMusic();
+
     }
 }

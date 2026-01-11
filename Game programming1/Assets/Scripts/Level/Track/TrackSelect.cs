@@ -6,6 +6,7 @@ public class TrackSelect : MonoBehaviour
     public GameObject Prefab1;
     public GameObject Prefab2;
     public GameObject Prefab3;
+    public GameObject PrefabFinish;
 
     [Header("Build Controller")]
     public BuildController buildController;
@@ -33,5 +34,10 @@ public class TrackSelect : MonoBehaviour
     public void Select3()
     {
         buildController.SetTrackPrefab(Prefab3);
+    }
+
+    public void SelectFinish()
+    {
+        buildController.SetTrackPrefab(PrefabFinish);
     }
 }

@@ -92,6 +92,7 @@ public class MainMenuController : MonoBehaviour
 
     public void OnClickLevelSelect()
     {
+        AudioManager.Instance?.PlayButtonClickSFX();
         CloseAllPanels();
         if (levelSelectPanel != null) levelSelectPanel.SetActive(true);
 
@@ -101,18 +102,21 @@ public class MainMenuController : MonoBehaviour
 
     public void OnClickLevel()
     {
+        AudioManager.Instance?.PlayButtonClickSFX();
         CloseAllPanels();
         if (levelPanel != null) levelPanel.SetActive(true);
     }
 
     public void OnClickSettings()
     {
+        AudioManager.Instance?.PlayButtonClickSFX();
         CloseAllPanels();
         if (settingsPanel != null) settingsPanel.SetActive(true);
     }
 
     public void OnClickHelp()
     {
+        AudioManager.Instance?.PlayButtonClickSFX();
         CloseAllPanels();
         if (helpPanel != null) helpPanel.SetActive(true);
     }
@@ -120,6 +124,7 @@ public class MainMenuController : MonoBehaviour
 
     public void OnClickBackToMain()
     {
+        AudioManager.Instance?.PlayButtonClickSFX();
         OpenMainPanel();
     }
 
@@ -134,28 +139,33 @@ public class MainMenuController : MonoBehaviour
 
     public void OnClickLevel1()
     {
+        AudioManager.Instance?.PlayButtonClickSFX();
         LoadLevel(level1SceneName);
     }
 
     public void OnClickLevel2()
     {
         if (!isLevel2) return;
+        AudioManager.Instance?.PlayButtonClickSFX();
         LoadLevel(level2SceneName);
     }
 
     public void OnClickLevel3()
     {
         if (!isLevel3) return;
+        AudioManager.Instance?.PlayButtonClickSFX();
         LoadLevel(level3SceneName);
     }
 
     public void OnClickStartLevel()
     {
+        AudioManager.Instance?.PlayButtonClickSFX();
         LoadLevel(startSceneName);
     }
 
     public void OnClickFreeLevel()
     {
+        AudioManager.Instance?.PlayButtonClickSFX();
         LoadLevel(FreeSceneName);
     }
 

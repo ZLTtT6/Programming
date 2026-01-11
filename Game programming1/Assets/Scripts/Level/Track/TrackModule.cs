@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TrackModule : MonoBehaviour
 {
+
     public Vector2Int gridPos;
     [Header("Track Type")]
     public int trackType;
