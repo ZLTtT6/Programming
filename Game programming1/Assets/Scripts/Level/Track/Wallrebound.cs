@@ -45,6 +45,7 @@ public class Wallrebound : MonoBehaviour
     void OnCollisionEnter(Collision collision) => HandleWallCollision(collision);
     void OnCollisionStay(Collision collision) => HandleWallCollision(collision);
 
+    // Handling collisions with walls
     void HandleWallCollision(Collision collision)
     {
         if (!isRunning || rb == null) return;
@@ -69,6 +70,7 @@ public class Wallrebound : MonoBehaviour
         rb.position += normal * pullOut;
     }
 
+    // move
     public void StartRun(Vector3 initialDirection)
     {
         if (rb == null) return;

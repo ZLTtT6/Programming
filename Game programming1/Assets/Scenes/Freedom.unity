@@ -1738,9 +1738,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2144259950}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: OnClickLevel3
+        m_MethodName: OnClickFreeLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3568,7 +3568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Wallrebound
   wallTag: Wall
   speed: 0.8
-  nudgeOut: 0.06
+  pullOut: 0.02
   ignoreSpin: 1
   keepYZero: 1
 --- !u!135 &1511975013
@@ -4240,7 +4240,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2144259950}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: OnClickStartLevel
         m_Mode: 1
@@ -5504,7 +5504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Wallrebound
   wallTag: Wall
   speed: 1
-  nudgeOut: 0.1
+  pullOut: 0.02
   ignoreSpin: 1
   keepYZero: 1
 --- !u!135 &2132304787

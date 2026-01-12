@@ -11,10 +11,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource sfxSource;
 
     [Header("Music Clips")]
-    [SerializeField] private AudioClip backgroundMusic; // ±≥æ∞“Ù¿÷
-    [SerializeField] private AudioClip gameplayMusic;   // ”Œœ∑“Ù¿÷
-    [SerializeField] private AudioClip winMusic;        //  §¿˚“Ù¿÷
-    [SerializeField] private AudioClip loseMusic;       //  ß∞‹“Ù¿÷
+    [SerializeField] private AudioClip backgroundMusic; // ±≥æ∞“Ù¿÷ BackgroungMusic
+    [SerializeField] private AudioClip gameplayMusic;   // ”Œœ∑“Ù¿÷ GameMusic
+    [SerializeField] private AudioClip winMusic;        //  §¿˚“Ù¿÷ WinMusic
+    [SerializeField] private AudioClip loseMusic;       //  ß∞‹“Ù¿÷ LoseMusic
 
     [Header("SFX Clips")]
     [SerializeField] private AudioClip buttonClickSFX;

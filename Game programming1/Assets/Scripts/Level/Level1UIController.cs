@@ -26,7 +26,8 @@ public class Level1UIController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Pause();
+            if (isPaused) Resume();
+            else Pause();
         }
     }
     public void OnStartButtonPointerDown()
