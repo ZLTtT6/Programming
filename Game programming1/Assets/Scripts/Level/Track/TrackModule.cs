@@ -7,7 +7,7 @@ public class TrackModule : MonoBehaviour
     [Header("Track Type")]
     public int trackType;
 
-    [Header("Rotation (0=0бу,1=90бу,2=180бу,3=270бу)")]
+    [Header("Rotation")]
     public int rotationIndex = 0;
 
     public GameObject wallNorth;
@@ -27,6 +27,7 @@ public class TrackModule : MonoBehaviour
         SetWallForWorldDir(Vector2Int.left, trackManager.HasTrack(gridPos + Vector2Int.left) == false);
     }
 
+    // Use "worldDir" to find the corresponding wall object
     void SetWallForWorldDir(Vector2Int worldDir, bool shouldShowWall)
     {
         GameObject wallObject = GetWallObjectForWorldDir(worldDir);
@@ -36,6 +37,7 @@ public class TrackModule : MonoBehaviour
         }
     }
 
+    // Determine the position of the wall after rotation
     GameObject GetWallObjectForWorldDir(Vector2Int worldDir)
     {
         int steps = rotationIndex % 4;
@@ -52,6 +54,7 @@ public class TrackModule : MonoBehaviour
         return null;
     }
 
+    // Rotating
     Vector2Int RotateDirCW(Vector2Int dir, int stepsCW)
     {
         Vector2Int result = dir;

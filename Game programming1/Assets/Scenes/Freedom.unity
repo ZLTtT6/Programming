@@ -1821,7 +1821,7 @@ MonoBehaviour:
   Prefab2: {fileID: 5752439950396129855, guid: 2e7d24e54dfe6e3418205066a9f1ce65, type: 3}
   Prefab3: {fileID: 3512210407532026730, guid: be664e9817149024288b7b0adfa79799, type: 3}
   PrefabFinish: {fileID: 7615441985663402342, guid: aa62e2f2ae705394c9aaa6c95720d575, type: 3}
-  buildController: {fileID: 0}
+  buildController: {fileID: 1319093128}
 --- !u!4 &692457490
 Transform:
   m_ObjectHideFlags: 0

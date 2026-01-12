@@ -8,7 +8,7 @@ public class Wallrebound : MonoBehaviour
 
     [Header("Speed")]
     public float speed = 8f;
-    public float nudgeOut = 0.02f;
+    public float pullOut = 0.02f;
 
     [Header("Optional")]
     public bool ignoreSpin = true;
@@ -23,6 +23,7 @@ public class Wallrebound : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (rb == null) return;
 
+        // Continuous dynamic collision detection
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         StopAndFreeze();
     }
@@ -65,7 +66,7 @@ public class Wallrebound : MonoBehaviour
         moveDir = Vector3.Reflect(inDir, normal).normalized;
 
         rb.linearVelocity = moveDir * speed;
-        rb.position += normal * nudgeOut;
+        rb.position += normal * pullOut;
     }
 
     public void StartRun(Vector3 initialDirection)

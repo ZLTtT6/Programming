@@ -16,16 +16,17 @@ public class TrackManager : MonoBehaviour
         Instance = this;
     }
 
+    // Determine if a cell is "occupied".
     public bool IsOccupied(Vector2Int gridPos)
     {
         return tracks.ContainsKey(gridPos);
     }
-
     public bool HasTrack(Vector2Int gridPos)
     {
         return tracks.ContainsKey(gridPos);
     }
 
+    // get trackmoudle
     public TrackModule GetTrack(Vector2Int gridPos)
     {
         TrackModule trackModule;
@@ -37,18 +38,19 @@ public class TrackManager : MonoBehaviour
         return null;
     }
 
+    // start and finish
     public void ReserveCell(Vector2Int gridPos)
     {
         tracks[gridPos] = null;
         UpdateNeighbors(gridPos);
     }
 
+    // place or delect
     public void AddTrack(Vector2Int gridPos, TrackModule trackModule)
     {
         tracks[gridPos] = trackModule;
         UpdateNeighbors(gridPos);
     }
-
     public void RemoveTrack(Vector2Int gridPos)
     {
         if (tracks.ContainsKey(gridPos) == false)
@@ -62,6 +64,7 @@ public class TrackManager : MonoBehaviour
         UpdateNeighbors(gridPos);
     }
 
+    // neighbors walls
     void UpdateNeighbors(Vector2Int gridPos)
     {
         Vector2Int[] directions = new Vector2Int[4];

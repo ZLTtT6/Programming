@@ -6,11 +6,6 @@ public class FinishModule : MonoBehaviour
 
     void Start()
     {
-        if (gridManager == null)
-        {
-            gridManager = FindFirstObjectByType<GridManager>();
-        }
-
         Vector2Int finishGridPos = gridManager.WorldToGrid(transform.position);
 
         TrackManager trackManager = TrackManager.Instance;
